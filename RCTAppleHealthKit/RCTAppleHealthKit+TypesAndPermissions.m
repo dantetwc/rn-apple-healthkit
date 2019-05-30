@@ -31,6 +31,7 @@
         @"StepCount" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount],
         @"DistanceWalkingRunning" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning],
         @"DistanceCycling" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceCycling],
+        @"DistanceSwimming" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceSwimming],
         @"BasalEnergyBurned" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBasalEnergyBurned],
         @"ActiveEnergyBurned" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned],
         @"FlightsClimbed" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed],
@@ -151,6 +152,20 @@
         }
     }
     return writePermSet;
+}
+
+- (HKObjectType *)getWritePermFromString:(NSString *)writePerm {
+    return [[self writePermsDict] objectForKey:writePerm];
+}
+- (NSString *)getAuthorizationStatusString:(HKAuthorizationStatus)status {
+    switch (status) {
+        case HKAuthorizationStatusNotDetermined:
+            return @"NotDetermined";
+        case HKAuthorizationStatusSharingDenied:
+            return @"SharingDenied";
+        case HKAuthorizationStatusSharingAuthorized:
+            return @"SharingAuthorized";
+    }
 }
 
 @end
